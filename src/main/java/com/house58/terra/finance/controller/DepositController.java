@@ -1,0 +1,42 @@
+package com.house58.terra.finance.controller;
+
+import com.house58.terra.finance.dao.BalanceRepository;
+import com.house58.terra.finance.dao.CostRepository;
+import com.house58.terra.finance.dao.InvoiceRepository;
+import com.house58.terra.finance.dao.MovementRepository;
+import com.house58.terra.schedule.entity.Shedule;
+import org.springframework.web.bind.annotation.*;
+
+@RestController("deposito")
+public class DepositController {
+
+    private final BalanceRepository balanceRepository;
+    private final CostRepository costRepository;
+    private final InvoiceRepository invoiceRepository;
+    private final MovementRepository movementRepository;
+
+    public DepositController(BalanceRepository balanceRepository, CostRepository costRepository, InvoiceRepository invoiceRepository, MovementRepository movementRepository){
+        this.balanceRepository = balanceRepository;
+        this.costRepository = costRepository;
+        this.invoiceRepository = invoiceRepository;
+        this.movementRepository = movementRepository;
+    }
+/*
+    @PostMapping
+    private Shedule save(@RequestBody Shedule shedule){
+
+        return this.sheduleRepository.save(shedule);
+    }
+
+    @PutMapping
+    private Shedule update(@RequestBody Shedule shedule){
+        return this.sheduleRepository.save(shedule);
+    }
+
+    @DeleteMapping
+    private Shedule delete(@RequestBody Shedule shedule){
+        // shedule.setStatus(false);
+        return this.sheduleRepository.save(shedule);
+    }
+*/
+}
