@@ -1,27 +1,25 @@
 package com.house58.terra.schedule.entity;
 
-import com.house58.terra.schedule.enumm.SessionIdEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.UUID;
 
-@Entity(name ="prontuario")
+@Entity(name ="patiente-record")
 public class PatientRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
     private Date data;
+    @ManyToOne
     private Shedule shedule;
     private String description;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

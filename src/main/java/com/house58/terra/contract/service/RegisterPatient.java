@@ -4,7 +4,9 @@ import com.house58.terra.contract.dto.PatientDTO;
 import com.house58.terra.patient.dao.ResponsibleRepository;
 import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.patient.entity.Responsible;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RegisterPatient {
     private final ResponsibleRepository responsibleRepository;
 

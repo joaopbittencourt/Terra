@@ -5,7 +5,8 @@ import com.house58.terra.schedule.entity.Shedule;
 import com.house58.terra.schedule.service.StartShedule;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("shedule")
+@RestController 
+@RequestMapping("/shedule")
 public class SheduleController {
     private final SheduleRepository sheduleRepository;
     private final StartShedule startShedule;
@@ -13,23 +14,19 @@ public class SheduleController {
         this.sheduleRepository = sheduleRepository;
         this.startShedule =  startShedule;
     }
-    @PostMapping
+    @PostMapping("/save-shedule")
     private Shedule save(@RequestBody Shedule shedule){
         return this.sheduleRepository.save(shedule);
     }
 
-    @PutMapping
-    private Shedule update(@RequestBody Shedule shedule){
-        return this.sheduleRepository.save(shedule);
-    }
 
-    @DeleteMapping
+    @DeleteMapping("/delete-schedule")
     private Shedule delete(@RequestBody Shedule shedule){
        // shedule.setStatus(false);
         return this.sheduleRepository.save(shedule);
     }
 
-    @PostMapping("initshedule")
+    @PostMapping("/init-shedule")
     private Shedule initShedule(@RequestBody Shedule shedule){
         return this.startShedule.initSession(shedule.getContract().getPatient(), shedule.getSessionIdEnum(), shedule.getContract());
     }

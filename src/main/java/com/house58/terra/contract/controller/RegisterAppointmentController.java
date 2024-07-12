@@ -3,13 +3,12 @@ package com.house58.terra.contract.controller;
 import com.house58.terra.contract.service.RegisterAppointment;
 import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-@RestController("registerAppointment")
+@RestController
+@RequestMapping("/register-appointment")
 public class RegisterAppointmentController {
     public RegisterAppointment registerAppointment;
 
@@ -17,9 +16,14 @@ public class RegisterAppointmentController {
         this.registerAppointment =  registerAppointment;
     }
 
-    @PostMapping
+    @PostMapping("/register-register-appointment")
     public void register(@RequestBody Patient patient, @RequestBody Set<SessionIdEnum> sessionsId){
         this.registerAppointment.register(patient, sessionsId);
+    }
+
+    @GetMapping("/")
+    public String getHellow(){
+        return "Relou mundo";
     }
 
 }

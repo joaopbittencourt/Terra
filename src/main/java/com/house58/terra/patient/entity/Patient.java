@@ -8,23 +8,24 @@ import jakarta.persistence.Id;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity(name = "patient")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
     private String name;
     private Date birthDay;
     private String document;
     private Boolean status;
     private Set<SessionIdEnum> sessionsId;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

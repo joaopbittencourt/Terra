@@ -1,29 +1,25 @@
 package com.house58.terra.contract.controller;
 
 import com.house58.terra.contract.dao.ModalityRepository;
-import com.house58.terra.contract.entity.Modalito;
+import com.house58.terra.contract.entity.Modaliity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("modality")
+@RestController 
+@RequestMapping("/modality")
 public class ModalityController {
     private final ModalityRepository modalityRepository;
 
     public ModalityController(ModalityRepository modalityRepository) {
         this.modalityRepository = modalityRepository;
     }
-    @PostMapping
-    private Modalito save(@RequestBody Modalito modalito){
-        return this.modalityRepository.save(modalito);
+    @PostMapping("/save-modality")
+    private Modaliity save(@RequestBody Modaliity modaliity){
+        return this.modalityRepository.save(modaliity);
     }
 
-    @PutMapping
-    private Modalito update(@RequestBody Modalito modalito){
-        return this.modalityRepository.save(modalito);
-    }
-
-    @DeleteMapping
-    private Modalito delete(@RequestBody Modalito modalito){
-        modalito.setStatus(false);
-        return this.modalityRepository.save(modalito);
+    @DeleteMapping("/delete-modality")
+    private Modaliity delete(@RequestBody Modaliity modaliity){
+        modaliity.setStatus(false);
+        return this.modalityRepository.save(modaliity);
     }
 }

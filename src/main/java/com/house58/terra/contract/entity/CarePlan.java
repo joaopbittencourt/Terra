@@ -5,14 +5,15 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "CarePlan")
+@Table(name = "care-plan")
 public class CarePlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
 
     private String plan;
 
@@ -20,15 +21,16 @@ public class CarePlan {
     @OneToMany
     private List<Shedule> shedule;
 
-    private Modalito modalito;
+    @ManyToOne
+    private Modaliity modaliity;
 
     private BigDecimal value;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -48,12 +50,12 @@ public class CarePlan {
         this.countSession = countSession;
     }
 
-    public Modalito getModality() {
-        return modalito;
+    public Modaliity getModality() {
+        return modaliity;
     }
 
-    public void setModality(Modalito modalito) {
-        this.modalito = modalito;
+    public void setModality(Modaliity modaliity) {
+        this.modaliity = modaliity;
    }
 
     public BigDecimal getValue() {

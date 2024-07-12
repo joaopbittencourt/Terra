@@ -4,10 +4,11 @@ import com.house58.terra.finance.dao.BalanceRepository;
 import com.house58.terra.finance.dao.CostRepository;
 import com.house58.terra.finance.dao.InvoiceRepository;
 import com.house58.terra.finance.dao.MovementRepository;
-import com.house58.terra.schedule.entity.Shedule;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@RestController("deposito")
+@RestController 
+@RequestMapping("/deposito")
 public class DepositController {
 
     private final BalanceRepository balanceRepository;

@@ -4,7 +4,8 @@ import com.house58.terra.schedule.dao.SessionRepository;
 import com.house58.terra.schedule.entity.Session;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("session")
+@RestController 
+@RequestMapping("/session")
 public class SessionController  {
     private final SessionRepository sessionRepository;
 
@@ -16,12 +17,8 @@ public class SessionController  {
         return this.sessionRepository.save(session);
     }
 
-    @PutMapping
-    private Session update(@RequestBody Session session){
-        return this.sessionRepository.save(session);
-    }
 
-    @DeleteMapping
+    @DeleteMapping("/delete-session")
     private Session delete(@RequestBody Session session){
         session.setStatus(false);
         return this.sessionRepository.save(session);

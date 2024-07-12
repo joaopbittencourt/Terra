@@ -1,34 +1,34 @@
 package com.house58.terra.schedule.entity;
 
-import com.house58.terra.contract.entity.CarePlan;
 import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
 import com.house58.terra.user.entity.Discipline;
 import jakarta.persistence.*;
-import org.hibernate.boot.registry.selector.spi.StrategyCreator;
 
 import java.util.Date;
+import java.util.UUID;
 
 //Agenda
-@Entity
-@Table(name = "shedule")
+@Entity(name = "shedule")
 public class Shedule {
     @Id
     @GeneratedValue(strategy =  GenerationType.UUID)
-    private Long id;
+    private UUID id;
     private SessionIdEnum sessionIdEnum;
+    @ManyToOne
     private Discipline discipline;
+    @ManyToOne
     private Contract contract;
     private Date data;
 
     public Shedule() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

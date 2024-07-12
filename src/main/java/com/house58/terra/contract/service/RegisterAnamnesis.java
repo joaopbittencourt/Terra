@@ -1,12 +1,15 @@
 package com.house58.terra.contract.service;
 
-import com.house58.terra.patient.entity.Anamnesis;
 import com.house58.terra.contract.dao.AnamnesisRepository;
 import com.house58.terra.contract.dto.AnamnesisDTO;
 import com.house58.terra.patient.dao.PatientRepository;
 import com.house58.terra.patient.dao.ResponsibleRepository;
+import com.house58.terra.patient.entity.Anamnesis;
+import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.patient.entity.Responsible;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RegisterAnamnesis {
     private final AnamnesisRepository anamnesisRepository;
     private final PatientRepository patientRepository;
@@ -18,15 +21,22 @@ public class RegisterAnamnesis {
         this.responsibleRepository = responsibleRepository;
     }
 
+    public Patient registerPatient(Patient patient){
+        return this.patientRepository.save(patient);
+    }
+    public Responsible registerReponsiblw(Responsible responsible){
+        return this.responsibleRepository.save(responsible);
+    }
     public void register (AnamnesisDTO anamnesisDTO){
         Responsible responsible = anamnesisDTO.getResponsible();
-        responsible.setPatient(anamnesisDTO.getPatient());
-        Responsible responsible1 = responsibleRepository.save(responsible);
+        Patient patient = this.registerPatient(anamnesisDTO.getResponsible().getPatient());
+        responsible.setPatient(this.registerPatient(patient));
+
         anamnesisDTO.getDisciplineAnamneseDTO().forEach(disciplineAnamneseDTO -> {
             Anamnesis anamnesis = new Anamnesis();
             anamnesis.setDate(disciplineAnamneseDTO.getData());
             anamnesis.setDiscipline(disciplineAnamneseDTO.getDiscipline());
-            anamnesis.setPatient(responsible1.getPatient());
+            anamnesis.setPatient(patient);
             this.anamnesisRepository.save(anamnesis);
         });
 

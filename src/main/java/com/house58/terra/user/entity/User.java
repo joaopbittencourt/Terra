@@ -1,25 +1,29 @@
 package com.house58.terra.user.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.Date;
+import java.util.UUID;
 
-@Entity(name = "user")
+@Entity(name = "user-operator")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
     private String name;
     private String username;
     private String password;
     private Boolean status;
     private Date lastModify;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

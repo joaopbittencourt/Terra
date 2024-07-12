@@ -7,9 +7,11 @@ import com.house58.terra.schedule.dao.SessionRepository;
 import com.house58.terra.schedule.dao.SheduleRepository;
 import com.house58.terra.schedule.entity.Shedule;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class StartShedule {
 
     private final PatientRecordRepository patientRecordRepository;

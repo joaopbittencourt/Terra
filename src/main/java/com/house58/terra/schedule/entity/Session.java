@@ -4,31 +4,32 @@ import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
 import com.house58.terra.user.entity.Discipline;
 import com.house58.terra.user.entity.Team;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.UUID;
 
-@Entity(name ="sessao")
+@Entity(name ="session")
 public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
     private Date date;
+    @ManyToOne
     private Contract contract;
     private SessionIdEnum sessionId;
+    @ManyToOne
     private Team team;
+    @ManyToOne
     private Discipline discipline;
     private String exec;
     private Boolean status;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

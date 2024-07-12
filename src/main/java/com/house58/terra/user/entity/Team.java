@@ -2,21 +2,19 @@ package com.house58.terra.user.entity;
 
 import com.house58.terra.schedule.enumm.SessionIdEnum;
 import com.house58.terra.user.enumm.BillingEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
-@Entity(name = "equipe")
+@Entity(name = "team")
 public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
     private String name;
     private String document;
     private String employDocument;
@@ -24,15 +22,16 @@ public class Team {
     private String organizationSocial;
     private BillingEnum billingMode;
     private String registry;
+    @OneToMany
     private List<Discipline> discipline;
     private Set<SessionIdEnum> sessionsId;
     private String session;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

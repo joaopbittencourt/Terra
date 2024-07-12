@@ -3,10 +3,11 @@ package com.house58.terra.schedule.service;
 import com.house58.terra.schedule.dao.PatientRecordRepository;
 import com.house58.terra.schedule.entity.PatientRecord;
 import com.house58.terra.schedule.entity.Shedule;
-import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Service
 public class RegisterPatientRecord {
     private final PatientRecordRepository patientRecordRepository;
 

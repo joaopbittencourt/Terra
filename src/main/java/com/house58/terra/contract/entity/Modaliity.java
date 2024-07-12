@@ -3,26 +3,27 @@ package com.house58.terra.contract.entity;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "modality")
-public class Modalito {
+import java.util.UUID;
+
+@Entity (name = "modality")
+public class Modaliity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
     @Column(name = "modality")
     private String modality;
 
 
-    public Modalito(){
+    public Modaliity(){
 
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

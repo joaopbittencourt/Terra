@@ -2,11 +2,13 @@ package com.house58.terra.patient.entity;
 
 import jakarta.persistence.*;
 
-@Entity(name = "responsavel")
+import java.util.UUID;
+
+@Entity(name = "responsible")
 public class Responsible {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
 
     private String name;
 
@@ -21,11 +23,11 @@ public class Responsible {
     @ManyToOne
     private Patient patient;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

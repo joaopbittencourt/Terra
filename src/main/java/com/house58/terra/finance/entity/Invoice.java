@@ -2,19 +2,20 @@ package com.house58.terra.finance.entity;
 
 import com.house58.terra.contract.entity.CarePlan;
 import com.house58.terra.contract.entity.Contract;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity(name = "nota")
+import java.util.UUID;
+
+@Entity(name = "invoice")
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
 
+    @ManyToOne
     private Contract contract;
 
+    @ManyToOne
     private CarePlan carePlan;
 
     private String description;

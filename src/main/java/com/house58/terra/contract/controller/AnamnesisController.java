@@ -8,7 +8,8 @@ import com.house58.terra.patient.enumm.StatusEnum;
 import org.springframework.web.bind.annotation.*;
 
 //contrato
-@RestController("anamnesis")
+@RestController 
+@RequestMapping("/anamnesis")
 public class AnamnesisController {
     private final AnamnesisRepository anamnesisRepository ;
     private final RegisterAnamnesis registerAnamnesis;
@@ -17,23 +18,18 @@ public class AnamnesisController {
         this.registerAnamnesis = registerAnamnesis;
     }
 
-    @PostMapping
-    private Anamnesis save(@RequestBody Anamnesis anamnesis){
-        return this.anamnesisRepository.save(anamnesis);
-    }
-
-    @PostMapping
+    @PostMapping("/register-anamnesis")
     private void register(@RequestBody AnamnesisDTO anamnesis){
         this.registerAnamnesis.register(anamnesis);
     }
 
-    @PutMapping
+    @PutMapping("/begin-anamnesis")
     private Anamnesis begin(@RequestBody Anamnesis anamnesis){
         anamnesis.setStatusEnum(StatusEnum.REALIZED);
         return this.anamnesisRepository.save(anamnesis);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete-anamnesis")
     private Anamnesis delete(@RequestBody Anamnesis anamnesis){
         return this.anamnesisRepository.save(anamnesis);
     }

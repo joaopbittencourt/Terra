@@ -2,12 +2,14 @@ package com.house58.terra.contract.service;
 
 import com.house58.terra.contract.dao.ContractRepository;
 import com.house58.terra.contract.dto.AnamnesisDTO;
-import com.house58.terra.contract.dto.PatientDTO;
 import com.house58.terra.contract.entity.Contract;
+import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
 
+
+@Service
 public class RegisterContract {
     private final ContractRepository contractRepository;
 
@@ -17,7 +19,7 @@ public class RegisterContract {
 
     public Contract register(AnamnesisDTO anamnesisDTO){
         Contract contract = new Contract();
-        contract.setPatient(anamnesisDTO.getPatient());
+        contract.setPatient(anamnesisDTO.getResponsible().getPatient());
         contract.setDisciplineAnamneseDTO(anamnesisDTO.getDisciplineAnamneseDTO());
         contract.setStatus(Boolean.FALSE);
         return this.contractRepository.save(contract);

@@ -1,19 +1,18 @@
 package com.house58.terra.contract.entity;
 
-import com.house58.terra.patient.entity.Patient;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Date;
-import java.util.List;
+import java.util.UUID;
 
-@Entity(name= "healthinsuranc")
+@Entity(name= "health-insurance")
 public class HealthInsurance {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
 
     private String name;
 
@@ -25,11 +24,11 @@ public class HealthInsurance {
 
     private String number;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

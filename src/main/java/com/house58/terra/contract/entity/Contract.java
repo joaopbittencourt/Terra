@@ -3,32 +3,32 @@ package com.house58.terra.contract.entity;
 import com.house58.terra.contract.dto.DisciplineAnamneseDTO;
 import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
-import com.house58.terra.user.entity.Discipline;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity(name= "contract")
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private long id;
+    private UUID id;
 
     private Date effetiveDate;
 
     private Date dateOfValidity;
-
+    @OneToMany
     private List<CarePlan> carePlan;
 
+    @ManyToOne
     private HealthInsurance healthInsurance;
 
+    @ManyToOne
     private Patient patient;
 
+    @Transient
     private Set<DisciplineAnamneseDTO> disciplineAnamneseDTO;
 
     private Set<SessionIdEnum> sessionsId;
@@ -37,11 +37,11 @@ public class Contract {
 
     private Boolean status;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
