@@ -7,6 +7,9 @@ import com.house58.terra.patient.entity.Anamnesis;
 import com.house58.terra.patient.enumm.StatusEnum;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Set;
+
 //contrato
 @RestController 
 @RequestMapping("/anamnesis")
@@ -21,6 +24,11 @@ public class AnamnesisController {
     @PostMapping("/register-anamnesis")
     private void register(@RequestBody AnamnesisDTO anamnesis){
         this.registerAnamnesis.register(anamnesis);
+    }
+
+    @GetMapping
+    private List<Anamnesis> findAll(){
+        return this.anamnesisRepository.findAll();
     }
 
     @PutMapping("/begin-anamnesis")

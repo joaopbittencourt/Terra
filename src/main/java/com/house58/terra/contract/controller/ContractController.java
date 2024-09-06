@@ -6,7 +6,11 @@ import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.contract.service.RegisterAppointment;
 import com.house58.terra.contract.service.RegisterContract;
 import com.house58.terra.contract.service.RegisterPatient;
+import com.house58.terra.patient.entity.Patient;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 //contrato
 @RestController 
 @RequestMapping("/contract")
@@ -28,13 +32,17 @@ public class ContractController {
         return this.registerContract.register(anamnesisDTO);
     }
 
-    /*
-    @PostMapping("effectuated")
+    @GetMapping
+    private List<Contract> findAll(){
+        return this.contractRepository.findAll();
+    }
+
+    @PostMapping("/effectuated")
     private Contract effectuated(@RequestBody Contract contract){
         Contract contract1 = this.registerContract.effectuated(contract);
-        Patient patient = this.registerAppointment.register(contract1.getPatient(), contract1.getSessionsId());
+        this.registerAppointment.register(contract1.getPatient(), contract1.getSessionsId());
         return contract1;
-    }*/
+    }
 
     @DeleteMapping("/delete-contract")
     private Contract delete(@RequestBody Contract contract){

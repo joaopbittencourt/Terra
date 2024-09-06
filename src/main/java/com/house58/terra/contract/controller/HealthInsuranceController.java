@@ -4,6 +4,8 @@ import com.house58.terra.contract.dao.HealthInsuranceRepository;
 import com.house58.terra.contract.entity.HealthInsurance;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController 
 @RequestMapping("/healthinsurance")
 public class HealthInsuranceController {
@@ -15,6 +17,11 @@ public class HealthInsuranceController {
     @PostMapping("/save-healthinsurance")
     private HealthInsurance save(@RequestBody HealthInsurance healthInsurance){
         return this.healthInsuranceRepository.save(healthInsurance);
+    }
+
+    @GetMapping
+    private List<HealthInsurance> findAll(){
+        return this.healthInsuranceRepository.findAll();
     }
 
     @DeleteMapping("/delete-healthinsurance")
