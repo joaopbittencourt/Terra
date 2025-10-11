@@ -2,13 +2,10 @@ package com.house58.terra.user.controller;
 
 
 import com.house58.terra.user.dao.DisciplineRepository;
-import com.house58.terra.user.dao.TeamRepository;
 import com.house58.terra.user.entity.Discipline;
-import com.house58.terra.user.entity.Team;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/discipline")

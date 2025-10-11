@@ -1,6 +1,5 @@
 package com.house58.terra.contract.dto;
 
-import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.patient.entity.Responsible;
 
 import java.util.Date;

@@ -6,7 +6,6 @@ import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.contract.service.RegisterAppointment;
 import com.house58.terra.contract.service.RegisterContract;
 import com.house58.terra.contract.service.RegisterPatient;
-import com.house58.terra.patient.entity.Patient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,5 +47,9 @@ public class ContractController {
     private Contract delete(@RequestBody Contract contract){
         contract.setStatus(false);
         return this.contractRepository.save(contract);
+    }
+
+    public RegisterPatient getRegisterPatient() {
+        return registerPatient;
     }
 }

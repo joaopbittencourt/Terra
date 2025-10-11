@@ -8,7 +8,6 @@ import com.house58.terra.patient.enumm.StatusEnum;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 //contrato
 @RestController 
