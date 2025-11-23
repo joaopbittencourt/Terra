@@ -1,4 +1,4 @@
-package com.house58.terra.contract.entity;
+package com.house58.terra.healthinsurance.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,5 +1,6 @@
 package com.house58.terra.contract.entity;
 
+import com.house58.terra.modality.entity.Modality;
 import com.house58.terra.schedule.entity.Shedule;
 import jakarta.persistence.*;
 
@@ -22,7 +23,7 @@ public class CarePlan {
     private List<Shedule> shedule;
 
     @ManyToOne
-    private Modaliity modaliity;
+    private Modality modality;
 
     private BigDecimal value;
 
@@ -50,12 +51,12 @@ public class CarePlan {
         this.countSession = countSession;
     }
 
-    public Modaliity getModality() {
-        return modaliity;
+    public Modality getModality() {
+        return modality;
     }
 
-    public void setModality(Modaliity modaliity) {
-        this.modaliity = modaliity;
+    public void setModality(Modality modality) {
+        this.modality = modality;
    }
 
     public BigDecimal getValue() {

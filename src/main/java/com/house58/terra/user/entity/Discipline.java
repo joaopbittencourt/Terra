@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 import java.util.UUID;
 
-@Entity(name = "dicipline")
+@Entity(name = "discipline")
 public class Discipline {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

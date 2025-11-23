@@ -18,7 +18,8 @@ public class RegisterPatient {
     public void register(PatientDTO patientDTO){
         Patient patient = new Patient();
 
-        patient.setName(patientDTO.getName());
+        patient.setFirstName(patientDTO.getFirstName());
+        patient.setLastName(patientDTO.getLastName());
         patient.setBirthDay(patientDTO.getDateOfBird());
         patient.setDocument(patientDTO.getCpf());
 

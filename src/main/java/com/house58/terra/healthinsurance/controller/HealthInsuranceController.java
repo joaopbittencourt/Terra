@@ -1,7 +1,7 @@
-package com.house58.terra.contract.controller;
+package com.house58.terra.healthinsurance.controller;
 
-import com.house58.terra.contract.dao.HealthInsuranceRepository;
-import com.house58.terra.contract.entity.HealthInsurance;
+import com.house58.terra.healthinsurance.dao.HealthInsuranceRepository;
+import com.house58.terra.healthinsurance.entity.HealthInsurance;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

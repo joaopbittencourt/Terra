@@ -32,7 +32,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/contract/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.GET, "/api/healthinsurance/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.GET, "/api/modality/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
-
                         .requestMatchers(HttpMethod.GET, "/api/checking/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.GET, "/api/register-appointment/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.GET, "/api/patient/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
@@ -47,7 +46,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/contract/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.GET, "/api/healthinsurance/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.GET, "/api/modality/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
-
                         .requestMatchers(HttpMethod.POST, "/api/checking/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/register-appointment/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/patient/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)

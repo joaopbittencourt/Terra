@@ -1,6 +1,6 @@
-package com.house58.terra.contract.dao;
+package com.house58.terra.healthinsurance.dao;
 
-import com.house58.terra.contract.entity.HealthInsurance;
+import com.house58.terra.healthinsurance.entity.HealthInsurance;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

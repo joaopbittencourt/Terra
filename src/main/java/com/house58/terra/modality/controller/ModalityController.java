@@ -1,7 +1,8 @@
-package com.house58.terra.contract.controller;
+package com.house58.terra.modality.controller;
 
-import com.house58.terra.contract.dao.ModalityRepository;
-import com.house58.terra.contract.entity.Modaliity;
+
+import com.house58.terra.modality.dao.ModalityRepository;
+import com.house58.terra.modality.entity.Modality;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,18 +16,18 @@ public class ModalityController {
         this.modalityRepository = modalityRepository;
     }
     @PostMapping("/save-modality")
-    private Modaliity save(@RequestBody Modaliity modaliity){
-        return this.modalityRepository.save(modaliity);
+    private Modality save(@RequestBody Modality modality){
+        return this.modalityRepository.save(modality);
     }
 
     @GetMapping
-    private List<Modaliity> findAll(){
+    private List<Modality> findAll(){
         return this.modalityRepository.findAll();
     }
 
     @DeleteMapping("/delete-modality")
-    private Modaliity delete(@RequestBody Modaliity modaliity){
-        modaliity.setStatus(false);
-        return this.modalityRepository.save(modaliity);
+    private Modality delete(@RequestBody Modality modality){
+        modality.setStatus(false);
+        return this.modalityRepository.save(modality);
     }
 }

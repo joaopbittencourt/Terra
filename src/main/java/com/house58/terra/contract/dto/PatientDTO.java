@@ -6,19 +6,28 @@ import java.util.Date;
 import java.util.List;
 
 public class PatientDTO {
-    private String name;
+    private String firstName;
+    private String lastName;
     private String nameOfPersonResponsible;
     private String cpf;
     private String cpfOfPersibResponsible;
     private Date dateOfBird;
     private List<Discipline> discipline;
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getNameOfPersonResponsible() {

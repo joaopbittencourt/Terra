@@ -1,6 +1,7 @@
 package com.house58.terra.contract.entity;
 
 import com.house58.terra.contract.dto.DisciplineAnamneseDTO;
+import com.house58.terra.healthinsurance.entity.HealthInsurance;
 import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
 import jakarta.persistence.*;
