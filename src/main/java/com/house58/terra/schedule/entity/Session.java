@@ -2,7 +2,7 @@ package com.house58.terra.schedule.entity;
 
 import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
-import com.house58.terra.user.entity.Discipline;
+import com.house58.terra.therapy.entity.Therapy;
 import com.house58.terra.user.entity.Team;
 import jakarta.persistence.*;
 
@@ -21,7 +21,7 @@ public class Session {
     @ManyToOne
     private Team team;
     @ManyToOne
-    private Discipline discipline;
+    private Therapy therapy;
     private String exec;
     private Boolean status;
 
@@ -57,12 +57,20 @@ public class Session {
         this.team = team;
     }
 
-    public Discipline getDiscipline() {
-        return discipline;
+    public SessionIdEnum getSessionId() {
+        return sessionId;
     }
 
-    public void setDiscipline(Discipline discipline) {
-        this.discipline = discipline;
+    public void setSessionId(SessionIdEnum sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public Therapy getTherapy() {
+        return therapy;
+    }
+
+    public void setTherapy(Therapy therapy) {
+        this.therapy = therapy;
     }
 
     public String getExec() {

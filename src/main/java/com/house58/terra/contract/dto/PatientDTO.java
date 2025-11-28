@@ -1,6 +1,6 @@
 package com.house58.terra.contract.dto;
 
-import com.house58.terra.user.entity.Discipline;
+import com.house58.terra.therapy.entity.Therapy;
 
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,7 @@ public class PatientDTO {
     private String cpf;
     private String cpfOfPersibResponsible;
     private Date dateOfBird;
-    private List<Discipline> discipline;
+    private List<Therapy> therapyList;
 
     public String getLastName() {
         return lastName;
@@ -62,11 +62,7 @@ public class PatientDTO {
         this.dateOfBird = dateOfBird;
     }
 
-    public List<Discipline> getDiscipline() {
-        return discipline;
-    }
+    public List<Therapy> getTherapyList() {return therapyList;}
 
-    public void setDiscipline(List<Discipline> discipline) {
-        this.discipline = discipline;
-    }
+    public void setTherapyList(List<Therapy> therapyList) {this.therapyList = therapyList;}
 }

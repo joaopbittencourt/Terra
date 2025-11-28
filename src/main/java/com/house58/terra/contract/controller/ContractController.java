@@ -2,12 +2,18 @@ package com.house58.terra.contract.controller;
 
 import com.house58.terra.contract.dao.ContractRepository;
 import com.house58.terra.contract.dto.AnamnesisDTO;
+import com.house58.terra.contract.entity.CarePlan;
 import com.house58.terra.contract.entity.Contract;
+import com.house58.terra.contract.entity.TherapyList;
 import com.house58.terra.contract.service.RegisterAppointment;
 import com.house58.terra.contract.service.RegisterContract;
-import com.house58.terra.contract.service.RegisterPatient;
+import com.house58.terra.healthinsurance.entity.HealthInsurance;
+import com.house58.terra.modality.entity.Modality;
+import com.house58.terra.patient.entity.Patient;
+import com.house58.terra.patient.service.RegisterPatient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 //contrato
@@ -27,8 +33,8 @@ public class ContractController {
     }
 
     @PostMapping("/register-contract")
-    private Contract register(@RequestBody AnamnesisDTO anamnesisDTO){
-        return this.registerContract.register(anamnesisDTO);
+    private Contract register(@RequestBody Patient patient, @RequestBody HealthInsurance healthInsurance, @RequestBody Modality modality, @RequestBody List<TherapyList> therapyLists, @RequestBody Date effetiveDate, @RequestBody Date dateOfValidity){
+        return this.registerContract.register(patient, healthInsurance,  modality, therapyLists, effetiveDate, dateOfValidity);
     }
 
     @GetMapping
@@ -36,18 +42,7 @@ public class ContractController {
         return this.contractRepository.findAll();
     }
 
-    @PostMapping("/effectuated")
-    private Contract effectuated(@RequestBody Contract contract){
-        Contract contract1 = this.registerContract.effectuated(contract);
-        this.registerAppointment.register(contract1.getPatient(), contract1.getSessionsId());
-        return contract1;
-    }
 
-    @DeleteMapping("/delete-contract")
-    private Contract delete(@RequestBody Contract contract){
-        contract.setStatus(false);
-        return this.contractRepository.save(contract);
-    }
 
     public RegisterPatient getRegisterPatient() {
         return registerPatient;

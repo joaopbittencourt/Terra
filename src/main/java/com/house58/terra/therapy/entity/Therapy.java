@@ -1,14 +1,15 @@
-package com.house58.terra.user.entity;
+package com.house58.terra.therapy.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(name = "discipline")
-public class Discipline {
+public class Therapy implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

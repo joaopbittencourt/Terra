@@ -2,7 +2,8 @@ package com.house58.terra.schedule.entity;
 
 import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
-import com.house58.terra.user.entity.Discipline;
+
+import com.house58.terra.therapy.entity.Therapy;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -16,10 +17,15 @@ public class Shedule {
     private UUID id;
     private SessionIdEnum sessionIdEnum;
     @ManyToOne
-    private Discipline discipline;
+    private Therapy therapy;
     @ManyToOne
     private Contract contract;
+
+    private Boolean isAnamnesis;
+
     private Date data;
+
+    private Boolean status;
 
     public Shedule() {
     }
@@ -40,13 +46,9 @@ public class Shedule {
         this.sessionIdEnum = sessionIdEnum;
     }
 
-    public Discipline getDiscipline() {
-        return discipline;
-    }
+    public Therapy getTherapy() {return therapy;}
 
-    public void setDiscipline(Discipline discipline) {
-        this.discipline = discipline;
-    }
+    public void setTherapy(Therapy therapy) {this.therapy = therapy;}
 
     public Contract getContract() {
         return contract;
@@ -62,5 +64,21 @@ public class Shedule {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public Boolean getAnamnesis() {
+        return isAnamnesis;
+    }
+
+    public void setAnamnesis(Boolean anamnesis) {
+        isAnamnesis = anamnesis;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

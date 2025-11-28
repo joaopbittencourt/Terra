@@ -9,7 +9,7 @@ public class AnamnesisDTO {
 
     private Responsible responsible;
     private Date data;
-    private Set<DisciplineAnamneseDTO> disciplineAnamneseDTO;
+    private Set<TherapyAnamneseDTO> therapyAnamneseDTO;
     private String description;
 
     public Responsible getResponsible() {
@@ -36,11 +36,11 @@ public class AnamnesisDTO {
         this.description = description;
     }
 
-    public Set<DisciplineAnamneseDTO> getDisciplineAnamneseDTO() {
-        return disciplineAnamneseDTO;
+    public Set<TherapyAnamneseDTO> getTherapyAnamneseDTO() {
+        return therapyAnamneseDTO;
     }
 
-    public void setDisciplineAnamneseDTO(Set<DisciplineAnamneseDTO> disciplineAnamneseDTO) {
-        this.disciplineAnamneseDTO = disciplineAnamneseDTO;
+    public void setTherapyAnamneseDTO(Set<TherapyAnamneseDTO> therapyAnamneseDTO) {
+        this.therapyAnamneseDTO = therapyAnamneseDTO;
     }
 }

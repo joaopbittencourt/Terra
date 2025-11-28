@@ -32,10 +32,10 @@ public class RegisterAnamnesis {
         Patient patient = this.registerPatient(anamnesisDTO.getResponsible().getPatient());
         responsible.setPatient(this.registerPatient(patient));
 
-        anamnesisDTO.getDisciplineAnamneseDTO().forEach(disciplineAnamneseDTO -> {
+        anamnesisDTO.getTherapyAnamneseDTO().forEach(therapyAnamneseDTO -> {
             Anamnesis anamnesis = new Anamnesis();
-            anamnesis.setDate(disciplineAnamneseDTO.getData());
-            anamnesis.setDiscipline(disciplineAnamneseDTO.getDiscipline());
+            anamnesis.setDate(therapyAnamneseDTO.getData());
+           // anamnesis.setTherapy(therapyAnamneseDTO.getTherapy());
             anamnesis.setPatient(patient);
             this.anamnesisRepository.save(anamnesis);
         });

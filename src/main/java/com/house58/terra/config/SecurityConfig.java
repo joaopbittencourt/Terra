@@ -56,7 +56,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/discipline/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/team/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/user/**").hasAnyRole(ADMIN, TERAPEUTA, RECEPCIONISTA)
-                        .anyRequest().authenticated());
+                        .anyRequest().permitAll());
 
         http.sessionManagement(sess -> sess.sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS));

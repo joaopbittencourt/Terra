@@ -2,12 +2,19 @@ package com.house58.terra.contract.service;
 
 import com.house58.terra.contract.dao.ContractRepository;
 import com.house58.terra.contract.dto.AnamnesisDTO;
+import com.house58.terra.contract.dto.TherapyPatientDTO;
+import com.house58.terra.contract.entity.CarePlan;
 import com.house58.terra.contract.entity.Contract;
+import com.house58.terra.contract.entity.TherapyList;
+import com.house58.terra.healthinsurance.entity.HealthInsurance;
+import com.house58.terra.modality.entity.Modality;
+import com.house58.terra.patient.entity.Patient;
+import com.house58.terra.therapy.entity.Therapy;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
-
+import java.util.List;
 
 @Service
 public class RegisterContract {
@@ -16,12 +23,22 @@ public class RegisterContract {
     public RegisterContract(ContractRepository contractRepository) {
         this.contractRepository = contractRepository;
     }
-
+/*
     public Contract register(AnamnesisDTO anamnesisDTO){
         Contract contract = new Contract();
         contract.setPatient(anamnesisDTO.getResponsible().getPatient());
-        contract.setDisciplineAnamneseDTO(anamnesisDTO.getDisciplineAnamneseDTO());
+        contract.setTherapyAnamneseDTO(anamnesisDTO.getTherapyAnamneseDTO());
         contract.setStatus(Boolean.FALSE);
+        return this.contractRepository.save(contract);
+    }
+*/
+
+    public Contract register(Patient patient, HealthInsurance healthInsurance, Modality modality, List<TherapyList> therapyList, Date effetiveDate, Date dateOfValidity){
+        Contract contract = new Contract();
+        contract.setPatient(patient);
+        contract.setTherapyLists(therapyList);
+        contract.setEffetiveDate(effetiveDate);
+        contract.setDateOfValidity(dateOfValidity);
         return this.contractRepository.save(contract);
     }
 

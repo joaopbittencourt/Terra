@@ -1,10 +1,8 @@
 package com.house58.terra.patient.entity;
 
 import com.house58.terra.schedule.enumm.SessionIdEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Date;
 import java.util.Set;
@@ -22,6 +20,7 @@ public class Patient {
     private Date birthDay;
     private String telephone;
     private String gender;
+    @Column(name = "document", unique = true, nullable = false)
     private String document;
     private Boolean status;
     private String agreement;

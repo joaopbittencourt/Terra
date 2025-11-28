@@ -1,8 +1,10 @@
 package com.house58.terra.user.entity;
 
 import com.house58.terra.schedule.enumm.SessionIdEnum;
+import com.house58.terra.therapy.entity.Therapy;
 import com.house58.terra.user.enumm.BillingEnum;
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
+    @Column(name = "document", unique = true, nullable = false)
     private String document;
     private String employDocument;
     private Date birthDay;
@@ -23,7 +26,7 @@ public class Team {
     private BillingEnum billingMode;
     private String registry;
     @OneToMany
-    private List<Discipline> discipline;
+    private List<Therapy> therapy;
     private Set<SessionIdEnum> sessionsId;
     private String session;
 
@@ -83,12 +86,12 @@ public class Team {
         this.registry = registry;
     }
 
-    public List<Discipline> getDiscipline() {
-        return discipline;
+    public List<Therapy> getDiscipline() {
+        return therapy;
     }
 
-    public void setDiscipline(List<Discipline> discipline) {
-        this.discipline = discipline;
+    public void setDiscipline(List<Therapy> discipline) {
+        this.therapy = therapy;
     }
 
     public String getSession() {

@@ -1,9 +1,6 @@
 package com.house58.terra.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.UUID;
@@ -14,6 +11,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
     private String password;
     private Boolean status;

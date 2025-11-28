@@ -1,11 +1,12 @@
 package com.house58.terra.patient.entity;
 
 import com.house58.terra.patient.enumm.StatusEnum;
-import com.house58.terra.user.entity.Discipline;
+import com.house58.terra.therapy.entity.Therapy;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "anamnesis")
@@ -17,8 +18,8 @@ public class Anamnesis {
     private Patient patient;
     private Date date;
     private String observation;
-    @ManyToOne
-    private Discipline discipline;
+    @OneToMany
+    private List<Therapy> therapy;
     private StatusEnum statusEnum;
     private BigDecimal value;
 
@@ -62,13 +63,9 @@ public class Anamnesis {
         this.patient = patient;
     }
 
-    public Discipline getDiscipline() {
-        return discipline;
-    }
+    public List<Therapy> getTherapy() {return therapy;}
 
-    public void setDiscipline(Discipline discipline) {
-        this.discipline = discipline;
-    }
+    public void setTherapy(List<Therapy> therapy) {this.therapy = therapy;}
 
     public StatusEnum getStatusEnum() {
         return statusEnum;

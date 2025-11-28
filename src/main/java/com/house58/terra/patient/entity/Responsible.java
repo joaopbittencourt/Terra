@@ -1,23 +1,21 @@
 package com.house58.terra.patient.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(name = "responsible")
-public class Responsible {
+public class Responsible implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     private String name;
-
+    @Column(name = "document", unique = true, nullable = false)
     private String document;
-
     private Long documentFis;
-
     private String phone;
-
     private Boolean status;
 
     @ManyToOne

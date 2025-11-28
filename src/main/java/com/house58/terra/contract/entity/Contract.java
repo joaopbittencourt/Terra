@@ -1,18 +1,21 @@
 package com.house58.terra.contract.entity;
 
-import com.house58.terra.contract.dto.DisciplineAnamneseDTO;
+import com.house58.terra.contract.dto.TherapyAnamneseDTO;
 import com.house58.terra.healthinsurance.entity.HealthInsurance;
 import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
+import com.house58.terra.therapy.services.Therapist;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity(name= "contract")
-public class Contract {
+@Entity
+@Table(name= "contract")
+public class Contract implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -21,18 +24,12 @@ public class Contract {
 
     private Date dateOfValidity;
     @OneToMany
-    private List<CarePlan> carePlan;
-
-    @ManyToOne
+    private List<TherapyList> therapyLists;
     private HealthInsurance healthInsurance;
-
     @ManyToOne
     private Patient patient;
-
     @Transient
-    private Set<DisciplineAnamneseDTO> disciplineAnamneseDTO;
-
-    private Set<SessionIdEnum> sessionsId;
+    private Set<TherapyAnamneseDTO> therapyAnamneseDTO;
 
     private String observation;
 
@@ -62,13 +59,9 @@ public class Contract {
         this.dateOfValidity = dateOfValidity;
     }
 
-    public List<CarePlan> getCarePlan() {
-        return carePlan;
-    }
+    public List<TherapyList> getTherapyLists() {return therapyLists;}
 
-    public void setCarePlan(List<CarePlan> carePlan) {
-        this.carePlan = carePlan;
-    }
+    public void setTherapyLists(List<TherapyList> therapyLists) {this.therapyLists = therapyLists;}
 
     public String getObservation() {
         return observation;
@@ -102,19 +95,12 @@ public class Contract {
         this.status = status;
     }
 
-    public Set<DisciplineAnamneseDTO> getDisciplineAnamneseDTO() {
-        return disciplineAnamneseDTO;
+    public Set<TherapyAnamneseDTO> getTherapyAnamneseDTO() {
+        return therapyAnamneseDTO;
     }
 
-    public void setDisciplineAnamneseDTO(Set<DisciplineAnamneseDTO> disciplineAnamneseDTO) {
-        this.disciplineAnamneseDTO = disciplineAnamneseDTO;
+    public void setTherapyAnamneseDTO(Set<TherapyAnamneseDTO> therapyAnamneseDTO) {
+        this.therapyAnamneseDTO = therapyAnamneseDTO;
     }
 
-    public Set<SessionIdEnum> getSessionsId() {
-        return sessionsId;
-    }
-
-    public void setSessionsId(Set<SessionIdEnum> sessionsId) {
-        this.sessionsId = sessionsId;
-    }
 }

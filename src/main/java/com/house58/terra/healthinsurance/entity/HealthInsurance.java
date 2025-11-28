@@ -1,15 +1,14 @@
 package com.house58.terra.healthinsurance.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity(name= "health-insurance")
-public class HealthInsurance {
+@Entity
+@Table(name= "health-insurance")
+public class HealthInsurance implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -71,4 +70,5 @@ public class HealthInsurance {
     public void setNumber(String number) {
         this.number = number;
     }
+
 }

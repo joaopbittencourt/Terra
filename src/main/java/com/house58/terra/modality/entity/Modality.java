@@ -3,10 +3,11 @@ package com.house58.terra.modality.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity (name = "modality")
-public class Modality {
+public class Modality implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

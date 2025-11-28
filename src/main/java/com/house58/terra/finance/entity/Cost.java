@@ -2,7 +2,8 @@ package com.house58.terra.finance.entity;
 
 import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.healthinsurance.entity.HealthInsurance;
-import com.house58.terra.user.entity.Discipline;
+
+import com.house58.terra.therapy.entity.Therapy;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,11 +18,9 @@ public class Cost {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Nullable
     private HealthInsurance healthInsurance;
-    @Nullable
     private Contract contract;
-    private Discipline discipline;
+    private Therapy therapy;
     private Double value;
     private Boolean status;
 
@@ -51,13 +50,9 @@ public class Cost {
         this.contract = contract;
     }
 
-    public Discipline getDiscipline() {
-        return discipline;
-    }
+    public Therapy getTherapy() {return therapy;}
 
-    public void setDiscipline(Discipline discipline) {
-        this.discipline = discipline;
-    }
+    public void setTherapy(Therapy therapy) {this.therapy = therapy;}
 
     public Double getValue() {
         return value;

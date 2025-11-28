@@ -15,14 +15,11 @@ public class CarePlan {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     private String plan;
-
     private Integer countSession;
     @OneToMany
     private List<Shedule> shedule;
 
-    @ManyToOne
     private Modality modality;
 
     private BigDecimal value;
