@@ -16,6 +16,7 @@ public class HealthInsuranceController {
     }
     @PostMapping("/save-healthinsurance")
     private HealthInsurance save(@RequestBody HealthInsurance healthInsurance){
+        System.out.println(healthInsurance);
         return this.healthInsuranceRepository.save(healthInsurance);
     }
 

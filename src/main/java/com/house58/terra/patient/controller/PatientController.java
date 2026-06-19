@@ -1,11 +1,14 @@
 package com.house58.terra.patient.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.house58.terra.patient.dao.PatientRepository;
 import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.patient.service.RegisterPatient;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Parameter;
 import java.util.List;
+import java.util.UUID;
 
 @RestController 
 @RequestMapping("/patient")
@@ -18,8 +21,8 @@ public class PatientController {
     }
 
     @PostMapping("/save-patient")
-    private Patient save(@RequestBody Patient patient){
-        return this.registerPatient.register(patient);
+    private Patient register(@RequestBody Patient patient){
+        return patientRepository.save(patient);
     }
 
     @GetMapping
@@ -32,6 +35,11 @@ public class PatientController {
         return this.patientRepository.save(patient);
     }
 
+    @GetMapping("/{patientId}")
+    private Patient findById(@PathVariable UUID patientId){
+        System.out.println(patientId);
+        return this.patientRepository.getById(patientId);
+    }
 
 
 

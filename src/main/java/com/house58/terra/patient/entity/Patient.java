@@ -1,14 +1,18 @@
 package com.house58.terra.patient.entity;
 
-import com.house58.terra.schedule.enumm.SessionIdEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.house58.terra.contract.entity.Contract;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "patient")
+@Entity
+@Table(name = "patient")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -16,9 +20,13 @@ public class Patient {
     private String firstName;
     private String lastName;
     private String email;
-    private Responsible responsible;
+    @ManyToMany
+    private List<Guardians> guardians;
+    @OneToMany(mappedBy= "patient", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Contract> contracts;
     private Date birthDay;
-    private String telephone;
+    private String phoneNumber;
     private String gender;
     @Column(name = "document", unique = true, nullable = false)
     private String document;
@@ -28,7 +36,6 @@ public class Patient {
     private Date creaded;
     private Date updated;
     private String observations;
-    private Set<SessionIdEnum> sessionsId;
 
     public UUID getId() {
         return id;
@@ -62,20 +69,36 @@ public class Patient {
         this.email = email;
     }
 
-    public Responsible getResponsible() {
-        return responsible;
+    public List<Guardians> getGuardians() {
+        return guardians;
     }
 
-    public void setResponsible(Responsible responsible) {
-        this.responsible = responsible;
+    public void setGuardians(List<Guardians> guardians) {
+        this.guardians = guardians;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public List<Contract> getContracts() {
+        return contracts;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
+
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getGender() {
@@ -84,6 +107,22 @@ public class Patient {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public String getAgreement() {
@@ -116,38 +155,6 @@ public class Patient {
 
     public void setUpdated(Date updated) {
         this.updated = updated;
-    }
-
-    public Date getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public Set<SessionIdEnum> getSessionsId() {
-        return sessionsId;
-    }
-
-    public void setSessionsId(Set<SessionIdEnum> sessionsId) {
-        this.sessionsId = sessionsId;
     }
 
     public String getObservations() {

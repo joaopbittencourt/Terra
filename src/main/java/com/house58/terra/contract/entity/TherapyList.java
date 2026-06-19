@@ -1,16 +1,13 @@
 package com.house58.terra.contract.entity;
 
 import com.house58.terra.therapy.entity.Therapy;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
 public class TherapyList {
 
-    @Id
-    @GeneratedValue(strategy =  GenerationType.UUID)
+
     private UUID id;
     private Therapy therapy;
     private Integer count;

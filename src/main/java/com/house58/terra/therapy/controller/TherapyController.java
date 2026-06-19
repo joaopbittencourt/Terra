@@ -16,7 +16,7 @@ public class TherapyController {
         this.therapyRepository = therapyRepository;
     }
 
-    @GetMapping("/list-therapy")
+    @GetMapping()
     private List<Therapy> get(){
         return this.therapyRepository.findAll();
     }
@@ -28,7 +28,7 @@ public class TherapyController {
 
     @DeleteMapping("/delete-therapy")
     private Therapy delete(@RequestBody Therapy therapy){
-        //team.setStatus(false);
+        therapy.setActive(false);
         return this.therapyRepository.save(therapy);
     }
 }

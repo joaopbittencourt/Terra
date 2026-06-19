@@ -1,5 +1,8 @@
 package com.house58.terra.healthinsurance.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.house58.terra.contract.entity.Contract;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -7,11 +10,21 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name= "health-insurance")
+@Table(name= "health_insurance")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class HealthInsurance implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Column(nullable = false, unique = true)
+    private String operatorCod;
+    @Column(nullable = false)
+    private String productCod;
+
+    @OneToOne( mappedBy = "healthInsurance", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Contract contract;
+
 
     private String name;
 
@@ -20,8 +33,6 @@ public class HealthInsurance implements Serializable {
     private Date dateOfValidity;
 
     private Boolean status;
-
-    private String number;
 
     public UUID getId() {
         return id;
@@ -63,12 +74,23 @@ public class HealthInsurance implements Serializable {
         this.status = status;
     }
 
-    public String getNumber() {
-        return number;
+    public String getOperatorCod() {
+        return operatorCod;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setOperatorCod(String operatorCod) {
+        this.operatorCod = operatorCod;
     }
 
+    public String getProductCod() {
+        return productCod;
+    }
+
+    public void setProductCod(String productCod) {
+        this.productCod = productCod;
+    }
+
+    public Contract getContract() {return contract;}
+
+    public void setContract(Contract contract) {this.contract = contract;}
 }

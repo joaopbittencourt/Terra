@@ -16,7 +16,7 @@ public class RegisterAppointment {
     }
 
     public Patient register(Patient patient, Set<SessionIdEnum> sessionsIdEnum){
-        patient.setSessionsId(sessionsIdEnum);
+        //patient.setSessionsId(sessionsIdEnum);
         return patientRepository.save(patient);
     }
 

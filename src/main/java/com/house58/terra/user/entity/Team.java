@@ -1,34 +1,51 @@
 package com.house58.terra.user.entity;
 
-import com.house58.terra.schedule.enumm.SessionIdEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.house58.terra.schedule.entity.SShedule;
 import com.house58.terra.therapy.entity.Therapy;
 import com.house58.terra.user.enumm.BillingEnum;
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.UniqueElements;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
-@Entity(name = "team")
-public class Team {
+@Entity(name = "therapist")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Team extends User{
+    //public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String name;
     @Column(name = "document", unique = true, nullable = false)
-    private String document;
+    private String cpf;
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
     private String employDocument;
+    private String phoneNumber;
     private Date birthDay;
     private String organizationSocial;
     private BillingEnum billingMode;
-    private String registry;
+    private String professionalRegistration;
     @OneToMany
-    private List<Therapy> therapy;
-    private Set<SessionIdEnum> sessionsId;
+    private List<Therapy> therapies;
+
+    @OneToMany
+    private List<SShedule> shedules;
+
+
     private String session;
+    private Boolean active;
+
+    @Transient
+    private List<String> sessionsId;
+
+    public Team(){
+
+    }
+
+    public Team(Team team) {
+        super();
+    }
 
     public UUID getId() {
         return id;
@@ -38,20 +55,12 @@ public class Team {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDocument() {
-        return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getEmployDocument() {
@@ -78,20 +87,28 @@ public class Team {
         this.organizationSocial = organizationSocial;
     }
 
-    public String getRegistry() {
-        return registry;
+    public String getProfessionalRegistration() {
+        return professionalRegistration;
     }
 
-    public void setRegistry(String registry) {
-        this.registry = registry;
+    public void setProfessionalRegistration(String professionalRegistration) {
+        this.professionalRegistration = professionalRegistration;
+    }
+
+    public List<Therapy> getTherapies() {
+        return therapies;
+    }
+
+    public void setTherapies(List<Therapy> therapies) {
+        this.therapies = therapies;
     }
 
     public List<Therapy> getDiscipline() {
-        return therapy;
+        return therapies;
     }
 
     public void setDiscipline(List<Therapy> discipline) {
-        this.therapy = therapy;
+        this.therapies = therapies;
     }
 
     public String getSession() {
@@ -110,11 +127,43 @@ public class Team {
         this.billingMode = billingMode;
     }
 
-    public Set<SessionIdEnum> getSessionsId() {
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public List<SShedule> getShedules() {
+        return shedules;
+    }
+
+    public void setShedules(List<SShedule> shedules) {
+        this.shedules = shedules;
+    }
+
+    public List<String> getSessionsId() {
         return sessionsId;
     }
 
-    public void setSessionsId(Set<SessionIdEnum> sessionsId) {
+    public void setSessionsId(List<String> sessionsId) {
         this.sessionsId = sessionsId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

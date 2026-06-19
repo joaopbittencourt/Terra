@@ -1,10 +1,14 @@
 package com.house58.terra.contract.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.house58.terra.contract.dto.TherapyAnamneseDTO;
 import com.house58.terra.healthinsurance.entity.HealthInsurance;
+import com.house58.terra.modality.entity.Modality;
 import com.house58.terra.patient.entity.Patient;
-import com.house58.terra.schedule.enumm.SessionIdEnum;
-import com.house58.terra.therapy.services.Therapist;
+import com.house58.terra.schedule.entity.SShedule;
+import com.house58.terra.schedule.entity.Session;
+import com.house58.terra.therapy.entity.Therapy;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,6 +19,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name= "contract")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Contract implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,11 +28,21 @@ public class Contract implements Serializable {
     private Date effetiveDate;
 
     private Date dateOfValidity;
-    @OneToMany
-    private List<TherapyList> therapyLists;
+    @Transient
+    private List<Therapy> therapyLists;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "health_insurance_id")
     private HealthInsurance healthInsurance;
-    @ManyToOne
+
+    private Modality modality;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patient_id")
     private Patient patient;
+
+    @OneToMany(mappedBy="contract", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<SShedule> shedules;
+
     @Transient
     private Set<TherapyAnamneseDTO> therapyAnamneseDTO;
 
@@ -59,16 +74,16 @@ public class Contract implements Serializable {
         this.dateOfValidity = dateOfValidity;
     }
 
-    public List<TherapyList> getTherapyLists() {return therapyLists;}
+    public List<Therapy> getTherapyLists() {return therapyLists;}
 
-    public void setTherapyLists(List<TherapyList> therapyLists) {this.therapyLists = therapyLists;}
+    public void setTherapyLists(List<Therapy> therapyLists) {this.therapyLists = therapyLists;}
 
     public String getObservation() {
         return observation;
     }
 
     public HealthInsurance getHealthInsurance() {
-        return healthInsurance;
+        return this.healthInsurance;
     }
 
     public void setHealthInsurance(HealthInsurance healthInsurance) {
@@ -103,4 +118,19 @@ public class Contract implements Serializable {
         this.therapyAnamneseDTO = therapyAnamneseDTO;
     }
 
+    public List<SShedule> getShedules() {
+        return shedules;
+    }
+
+    public void setShedules(List<SShedule> shedules) {
+        this.shedules = shedules;
+    }
+
+    public Modality getModality() {
+        return modality;
+    }
+
+    public void setModality(Modality modality) {
+        this.modality = modality;
+    }
 }

@@ -1,6 +1,5 @@
 package com.house58.terra.finance.entity;
 
-import com.house58.terra.contract.entity.CarePlan;
 import com.house58.terra.contract.entity.Contract;
 import jakarta.persistence.*;
 
@@ -14,9 +13,6 @@ public class Invoice {
 
     @ManyToOne
     private Contract contract;
-
-    @ManyToOne
-    private CarePlan carePlan;
 
     private String description;
 

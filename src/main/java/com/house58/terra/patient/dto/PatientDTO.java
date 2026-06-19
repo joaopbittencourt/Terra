@@ -1,14 +1,13 @@
 package com.house58.terra.patient.dto;
 
 import com.house58.terra.contract.entity.Contract;
-import com.house58.terra.patient.entity.Anamnesis;
 import com.house58.terra.patient.entity.Patient;
 
 public class PatientDTO {
 
     private Patient patient;
     private Contract contract;
-    private Anamnesis anamnesis;
+
 
     public PatientDTO() {
 
@@ -30,11 +29,4 @@ public class PatientDTO {
         this.contract = contract;
     }
 
-    public Anamnesis getAnamnesis() {
-        return anamnesis;
-    }
-
-    public void setAnamnesis(Anamnesis anamnesis) {
-        this.anamnesis = anamnesis;
-    }
 }

@@ -1,8 +1,7 @@
 package com.house58.terra.contract.controller;
 
 import com.house58.terra.contract.dao.ContractRepository;
-import com.house58.terra.contract.dto.AnamnesisDTO;
-import com.house58.terra.contract.entity.CarePlan;
+import com.house58.terra.contract.dto.HealthPlanDTO;
 import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.contract.entity.TherapyList;
 import com.house58.terra.contract.service.RegisterAppointment;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 //contrato
 @RestController 
@@ -33,15 +33,34 @@ public class ContractController {
     }
 
     @PostMapping("/register-contract")
-    private Contract register(@RequestBody Patient patient, @RequestBody HealthInsurance healthInsurance, @RequestBody Modality modality, @RequestBody List<TherapyList> therapyLists, @RequestBody Date effetiveDate, @RequestBody Date dateOfValidity){
-        return this.registerContract.register(patient, healthInsurance,  modality, therapyLists, effetiveDate, dateOfValidity);
+    private Contract register(@RequestBody Patient patient, @RequestBody HealthInsurance healthInsurance, @RequestBody Modality modality){
+        return this.registerContract.register(patient, healthInsurance,  modality);
+    }
+
+    @PostMapping("/register-plan/{patientId}")
+    private Contract registerPlan(@PathVariable UUID patientId, @RequestBody HealthPlanDTO healthPlanDTO){
+        return registerContract.registerPlanCode(patientId, healthPlanDTO);
+    }
+    @PostMapping("/register-modality/{patientId}")
+    private Contract registerModality(@PathVariable UUID patientId, @RequestBody Modality modality){
+        return registerContract.registerModality(patientId, modality);
+    }
+
+
+    @GetMapping("/patient/{patientId}")
+    private List<Contract> getContractByPatient(@PathVariable UUID patientId){
+        return registerContract.findContractByPatient(patientId);
+    }
+
+    @PostMapping("/effectuated-contract")
+    private Contract effectuated(@RequestBody Contract contract){
+        return this.registerContract.effectuated(contract);
     }
 
     @GetMapping
     private List<Contract> findAll(){
         return this.contractRepository.findAll();
     }
-
 
 
     public RegisterPatient getRegisterPatient() {

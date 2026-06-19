@@ -2,6 +2,7 @@ package com.house58.terra.user.controller;
 
 import com.house58.terra.user.dao.TeamRepository;
 import com.house58.terra.user.entity.Team;
+import com.house58.terra.user.service.TeamServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,20 +11,21 @@ import java.util.List;
 @RequestMapping("/team")
 public class TeamController {
     private final TeamRepository teamRepository;
+    private final TeamServices teamServices;
 
-    public TeamController(TeamRepository teamRepository) {
+    public TeamController(TeamRepository teamRepository, TeamServices teamServices) {
         this.teamRepository = teamRepository;
+        this.teamServices = teamServices;
     }
 
-
-    @GetMapping("/list-team")
+    @GetMapping()
     private List<Team> save(){
-        return this.teamRepository.findAll();
+        return this.teamServices.findAll();
     }
 
     @PostMapping("/save-team")
-    private Team save(@RequestBody Team team){
-        return this.teamRepository.save(team);
+    private Team save(@RequestBody Team team) throws Exception {
+        return this.teamServices.save(team);
     }
 
     @DeleteMapping("/delete-team")

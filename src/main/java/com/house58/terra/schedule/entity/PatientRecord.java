@@ -1,5 +1,6 @@
 package com.house58.terra.schedule.entity;
 
+import com.house58.terra.patient.entity.Patient;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,7 +13,9 @@ public class PatientRecord {
     private UUID id;
     private Date data;
     @ManyToOne
-    private Shedule shedule;
+    private SShedule shedule;
+    @ManyToOne
+    private Patient patient;
     private String description;
 
     public UUID getId() {
@@ -39,11 +42,20 @@ public class PatientRecord {
         this.description = description;
     }
 
-    public Shedule getShedule() {
+    public SShedule getShedule() {
         return shedule;
     }
 
-    public void setShedule(Shedule shedule) {
+    public void setShedule(SShedule shedule) {
         this.shedule = shedule;
     }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
 }

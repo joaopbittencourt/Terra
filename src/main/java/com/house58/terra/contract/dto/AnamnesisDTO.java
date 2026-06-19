@@ -1,24 +1,18 @@
 package com.house58.terra.contract.dto;
 
-import com.house58.terra.patient.entity.Responsible;
+import com.house58.terra.contract.entity.Contract;
+import com.house58.terra.patient.entity.Guardians;
+import com.house58.terra.patient.entity.Patient;
 
 import java.util.Date;
 import java.util.Set;
 
 public class AnamnesisDTO {
 
-    private Responsible responsible;
     private Date data;
     private Set<TherapyAnamneseDTO> therapyAnamneseDTO;
     private String description;
-
-    public Responsible getResponsible() {
-        return responsible;
-    }
-
-    public void setResponsible(Responsible responsible) {
-        this.responsible = responsible;
-    }
+    private Contract contract;
 
     public Date getData() {
         return data;
@@ -42,5 +36,13 @@ public class AnamnesisDTO {
 
     public void setTherapyAnamneseDTO(Set<TherapyAnamneseDTO> therapyAnamneseDTO) {
         this.therapyAnamneseDTO = therapyAnamneseDTO;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 }

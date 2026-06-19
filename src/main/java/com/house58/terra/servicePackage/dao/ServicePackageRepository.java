@@ -1,0 +1,11 @@
+package com.house58.terra.servicePackage.dao;
+
+import com.house58.terra.servicePackage.entity.ServicePackage;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import java.util.UUID;
+
+@EnableJpaRepositories
+public interface ServicePackageRepository extends JpaRepository<ServicePackage, UUID> {
+}

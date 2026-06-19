@@ -1,21 +1,26 @@
 package com.house58.terra.therapy.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.house58.terra.schedule.entity.SShedule;
+import com.house58.terra.schedule.entity.Session;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "discipline")
+@Entity(name = "therapy")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Therapy implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
     private String description;
-    private String code;
+    private Boolean active;
+
+    @OneToMany
+    private List<SShedule> sheduleList;
 
     public UUID getId() {
         return id;
@@ -41,11 +46,19 @@ public class Therapy implements Serializable {
         this.description = description;
     }
 
-    public String getCode() {
-        return code;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public List<SShedule> getSheduleList() {
+        return sheduleList;
+    }
+
+    public void setSheduleList(List<SShedule> sheduleList) {
+        this.sheduleList = sheduleList;
     }
 }

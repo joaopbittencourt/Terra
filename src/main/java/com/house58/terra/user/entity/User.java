@@ -2,27 +2,39 @@ package com.house58.terra.user.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
-
-@Entity(name = "user-operator")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity(name = "user_operator")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private String keycloakId; // O 'sub' que vem no JWT
+    @Column(name = "email", unique =  true, nullable = false)
+    private String email;
     private String name;
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
-    private String password;
+    private String preferredTheme;
     private Boolean status;
-    private Date lastModify;
+    private Timestamp lastModify;
 
-    public UUID getId() {
-        return id;
+
+    public String getKeycloakId() {
+        return keycloakId;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -33,20 +45,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPreferredTheme() {
+        return preferredTheme;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPreferredTheme(String preferredTheme) {
+        this.preferredTheme = preferredTheme;
     }
 
     public Boolean getStatus() {
@@ -57,11 +61,19 @@ public class User {
         this.status = status;
     }
 
-    public Date getLastModify() {
+    public Timestamp getLastModify() {
         return lastModify;
     }
 
-    public void setLastModify(Date lastModify) {
+    public void setLastModify(Timestamp lastModify) {
         this.lastModify = lastModify;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

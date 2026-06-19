@@ -1,4 +1,8 @@
 package com.house58.terra.schedule.enumm;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum SessionIdEnum {
     // SESSÕES DE SEGUNDA-FEIRA (8 Manhã + 8 Tarde)
     SEG_0800, SEG_0830, SEG_0900, SEG_0930, SEG_1000, SEG_1030, SEG_1100, SEG_1130, // Manhã
@@ -22,6 +26,28 @@ public enum SessionIdEnum {
 
     // SESSÕES DE SÁBADO (8 Manhã + 8 Tarde)
     SAB_0800, SAB_0830, SAB_0900, SAB_0930, SAB_1000, SAB_1030, SAB_1100, SAB_1130, // Manhã
-    SAB_1300, SAB_1330, SAB_1400, SAB_1430, SAB_1500, SAB_1530, SAB_1600, SAB_1630  // Tarde
+    SAB_1300, SAB_1330, SAB_1400, SAB_1430, SAB_1500, SAB_1530, SAB_1600, SAB_1630; // Tarde
 
+    /**
+     * @JsonValue: Informa ao Jackson para usar o nome (String)
+     * na hora de transformar o objeto em JSON (Serialização).
+     */
+    @JsonValue
+    public String getValue() {
+        return name();
+    }
+
+    /**
+     * @JsonCreator: Ensina o Jackson a converter o texto do JSON
+     * de volta para a constante do Enum (Deserialização).
+     */
+    @JsonCreator
+    public static SessionIdEnum fromValue(String value) {
+        for (SessionIdEnum session : SessionIdEnum.values()) {
+            if (session.name().equalsIgnoreCase(value)) {
+                return session;
+            }
+        }
+        throw new IllegalArgumentException("Sessão inválida: " + value);
+    }
 }

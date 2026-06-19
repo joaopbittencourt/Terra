@@ -12,16 +12,10 @@ public class Modality implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(name = "modality")
-    private String modality;
-    @Column(name = "description")
+    private String name;
     private String description;
-
-    @Column(name = "created")
-    private String created;
-
-    @Column(name = "updated")
-    private String updated;
+    private String createdAt;
+    private String updatedAt;
 
 
 
@@ -37,12 +31,12 @@ public class Modality implements Serializable {
         this.id = id;
     }
 
-    public String getModality() {
-        return modality;
+    public String getName() {
+        return name;
     }
 
-    public void setModality(String modality) {
-        this.modality = modality;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getStatus() {
@@ -61,19 +55,19 @@ public class Modality implements Serializable {
         this.description = description;
     }
 
-    public String getCreated() {
-        return created;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated(String created) {
-        this.created = created;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getUpdated() {
-        return updated;
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated(String updated) {
-        this.updated = updated;
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
