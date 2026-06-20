@@ -27,4 +27,7 @@ public interface SheduleRepository extends JpaRepository<SShedule, UUID> {
 
     @Query("SELECT u FROM SShedule u  WHERE u.contract.id = %:contract% ")
     List<SShedule> getByContract(@Param("contract") UUID contract);
+
+    @Query("SELECT u FROM SShedule u  WHERE u.contract.id = %:contract% AND u.status= true ")
+    List<SShedule> getByContractSheduleActive(@Param("contract") UUID contract);
 }

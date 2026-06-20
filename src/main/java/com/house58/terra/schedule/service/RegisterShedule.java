@@ -25,8 +25,9 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Stream;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class RegisterShedule {
@@ -66,7 +67,7 @@ public class RegisterShedule {
 
         try {
             List<SShedule> sheduleList = new ArrayList<SShedule>();
-            List<SShedule> sheduleListNow = this.sheduleRepository.getByContract(contract1.getId());
+            List<SShedule> sheduleListNow = this.sheduleRepository.getByContractSheduleActive(contract1.getId());
             List<SShedule> sheduleListNowFiltred = new ArrayList<>();
             List<Therapy> therapyList = new ArrayList<Therapy>();
 
@@ -83,9 +84,9 @@ public class RegisterShedule {
                 }
 
                 therapyList.add(therapy);
-                sheduleListNowFiltred.addAll(this.factoryListSheduleRepeat(dataTherapyPatienteDTO.getSessionArrayList(), sheduleListNow.stream().filter(sh ->  sh.getTherapist().equals(team)).toList()));
-                if(sheduleListNowFiltred.isEmpty())
-                    throw new RuntimeException("Lista antiga não filtrada");
+
+
+
                 sheduleList.addAll(
                         this.factoryListAllShedule(
                                 contract1,
@@ -95,7 +96,10 @@ public class RegisterShedule {
                                 sheduleListNowFiltred));
 
             }
-
+            sheduleListNowFiltred.addAll(this.factoryListSheduleNegative(sheduleList, sheduleListNow));
+            if(sheduleListNowFiltred.isEmpty()){
+               // throw new RuntimeException("Lista antiga não filtrada");
+            }
             contract1.setTherapyLists(therapyList);
             contract1.getPatient().setStatus(true);
             contract1.setStatus(true);
@@ -105,13 +109,14 @@ public class RegisterShedule {
             //this.monthlyContractRepository.save(monthlyContract);
 
             List<SShedule> list = this.sheduleRepository.saveAll(sheduleList) ;
-
-            this.sheduleRepository.saveAll(sheduleListNowFiltred.stream().peek(s -> {
+            //List<SShedule> listNegative = new ArrayList<>();
+            List<SShedule> listNegative = sheduleListNowFiltred.stream().map(s -> {
                 s.setUpdatedAt(Timestamp.from(Instant.now()));
                 s.setStatus(false);
-                System.out.println(s);
-            }).toList());
 
+                return s;
+            }).toList();
+            this.sheduleRepository.saveAll(listNegative);
             return  list;
 
         } catch (Exception e) {
@@ -203,20 +208,16 @@ public class RegisterShedule {
         return  sheduleList;
     }
 
-    private List<SShedule> factoryListSheduleRepeat(List<String> sessionIdEnumList, List<SShedule> sheduleListNow) {
-        List<SShedule> listScheduleFilter = new ArrayList<>();
-        int index = 0;
-        for (String sessionIdEnum : sessionIdEnumList) {
-            List<SShedule> sheduleListRepeat = sheduleListNow.stream().filter(s -> {
-                System.out.println(s.getSessionIdEnum()+" == "+SessionIdEnum.fromValue(sessionIdEnum));
-                return s.getSessionIdEnum() == SessionIdEnum.fromValue(sessionIdEnum);
-            }).toList();
+    private List<SShedule> factoryListSheduleNegative(List<SShedule> sheduleListNew, List<SShedule> sheduleListNow) {
 
-            if (sheduleListRepeat.isEmpty())
-                listScheduleFilter.addAll(sheduleListRepeat);
-
-        }
-        return listScheduleFilter;
+        return sheduleListNow.stream().filter(s -> {
+            AtomicBoolean encontred = new AtomicBoolean(true);
+            sheduleListNew.forEach( u -> {
+                if(s.getTherapy() == u.getTherapy() && s.getSessionIdEnum() == u.getSessionIdEnum())
+                    encontred.set(false);
+            });
+            return encontred.get() ;
+        }).toList();
     }
 
     private SShedule factoryShedule(Contract contract, Therapy therapy, Team therapist, SessionIdEnum sessionIdEnum){
