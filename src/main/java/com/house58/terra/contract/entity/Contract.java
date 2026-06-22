@@ -32,6 +32,7 @@ public class Contract implements Serializable {
     private List<Therapy> therapyLists;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "health_insurance_id")
+    @JsonIgnore
     private HealthInsurance healthInsurance;
 
     private Modality modality;

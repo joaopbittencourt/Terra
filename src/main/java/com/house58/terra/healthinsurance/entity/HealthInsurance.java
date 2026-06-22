@@ -21,11 +21,6 @@ public class HealthInsurance implements Serializable {
     @Column(nullable = false)
     private String productCod;
 
-    @OneToOne( mappedBy = "healthInsurance", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Contract contract;
-
-
     private String name;
 
     private Date effetiveDate;
@@ -90,7 +85,4 @@ public class HealthInsurance implements Serializable {
         this.productCod = productCod;
     }
 
-    public Contract getContract() {return contract;}
-
-    public void setContract(Contract contract) {this.contract = contract;}
 }
