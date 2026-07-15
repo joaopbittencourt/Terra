@@ -211,12 +211,9 @@ public class RegisterShedule {
     private List<SShedule> factoryListSheduleNegative(List<SShedule> sheduleListNew, List<SShedule> sheduleListNow) {
 
         return sheduleListNow.stream().filter(s -> {
-            AtomicBoolean encontred = new AtomicBoolean(true);
-            sheduleListNew.forEach( u -> {
-                if(s.getTherapy() == u.getTherapy() && s.getSessionIdEnum() == u.getSessionIdEnum())
-                    encontred.set(false);
-            });
-            return encontred.get() ;
+            return !sheduleListNew.stream().anyMatch((SShedule u) ->
+                s.getTherapy() == u.getTherapy() && s.getSessionIdEnum() == u.getSessionIdEnum()
+            );
         }).toList();
     }
 
