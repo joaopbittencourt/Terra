@@ -4,6 +4,8 @@ import com.house58.terra.user.dao.TeamRepository;
 import com.house58.terra.user.entity.Team;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,15 +27,17 @@ public class TeamServices {
             t =  this.teamRepository.findById(team.getId());
             if(!t.isPresent())
                 throw new Exception("Terapeuta não encontrado");
-            teamNow = t.get();
+            teamNow = team;
 
         }else{
             teamNow = team;
         }
 
         teamNow.setSession(String.join(",",team.getSessionsId()));
-        teamNow.setDiscipline(team.getDiscipline());
         teamNow.setTherapies(team.getTherapies());
+        teamNow.setContractType(team.getContractType());
+        teamNow.setRemuneration(team.getRemuneration());
+        teamNow.setLastModify(Timestamp.from(Instant.now()));
         return this.teamRepository.save(teamNow);
     }
 
@@ -49,5 +53,4 @@ public class TeamServices {
         }
         return teamsDTO;
     }
-
 }

@@ -6,6 +6,7 @@ import com.house58.terra.therapy.entity.Therapy;
 import com.house58.terra.user.enumm.BillingEnum;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Entity(name = "therapist")
@@ -26,13 +27,22 @@ public class Team extends User{
     private String organizationSocial;
     private BillingEnum billingMode;
     private String professionalRegistration;
-    @OneToMany
-    private List<Therapy> therapies;
+
+    @ManyToMany(cascade =  { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+            name = "team_therapies",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "therapy_id")
+    )
+    private Set<Therapy> therapies;
 
     @OneToMany
     private List<SShedule> shedules;
 
 
+    private BillingEnum contractType;
+    private Number percentage;
+    private BigDecimal remuneration;
     private String session;
     private Boolean active;
 
@@ -95,19 +105,20 @@ public class Team extends User{
         this.professionalRegistration = professionalRegistration;
     }
 
-    public List<Therapy> getTherapies() {
+    public Set<Therapy> getTherapies() {
         return therapies;
     }
 
-    public void setTherapies(List<Therapy> therapies) {
+    public void setTherapies(Set<Therapy> therapies) {
         this.therapies = therapies;
     }
 
-    public List<Therapy> getDiscipline() {
+    public Set<Therapy> getDiscipline() {
         return therapies;
     }
 
     public void setDiscipline(List<Therapy> discipline) {
+
         this.therapies = therapies;
     }
 
@@ -166,4 +177,39 @@ public class Team extends User{
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public BillingEnum getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(BillingEnum contractType) {
+        this.contractType = contractType;
+    }
+
+    public Number getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(Number percentage) {
+        this.percentage = percentage;
+    }
+
+    public BigDecimal getRemuneration() {
+        return remuneration;
+    }
+
+    public void setRemuneration(BigDecimal remuneration) {
+        this.remuneration = remuneration;
+    }
+
+    public void addTherapy(Therapy therapy){
+        this.therapies.add(therapy);
+        therapy.getTeams().add(this);
+    }
+    public void removeTherapy(Therapy therapy){
+        this.therapies.remove(therapy);
+        therapy.getTeams().remove(this);
+    }
+
+
 }

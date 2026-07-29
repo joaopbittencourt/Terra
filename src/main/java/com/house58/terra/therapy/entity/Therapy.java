@@ -1,12 +1,15 @@
 package com.house58.terra.therapy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.house58.terra.schedule.entity.SShedule;
 import com.house58.terra.schedule.entity.Session;
+import com.house58.terra.user.entity.Team;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity(name = "therapy")
@@ -18,6 +21,11 @@ public class Therapy implements Serializable {
     private String name;
     private String description;
     private Boolean active;
+
+    @ManyToMany(mappedBy = "therapies")
+    @JsonIgnore
+    private Set<Team> teams;
+
 
     @OneToMany
     private List<SShedule> sheduleList;
@@ -60,5 +68,13 @@ public class Therapy implements Serializable {
 
     public void setSheduleList(List<SShedule> sheduleList) {
         this.sheduleList = sheduleList;
+    }
+
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
     }
 }
