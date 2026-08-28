@@ -96,10 +96,13 @@ public class RegisterShedule {
                                 sheduleListNowFiltred));
 
             }
-            sheduleListNowFiltred.addAll(this.factoryListSheduleNegative(sheduleList, sheduleListNow));
-            if(sheduleListNowFiltred.isEmpty()){
-               // throw new RuntimeException("Lista antiga não filtrada");
+            if(sheduleListNow.size()> 0){
+                sheduleListNowFiltred.addAll(this.factoryListSheduleNegative(sheduleList, sheduleListNow));
+                if(sheduleListNowFiltred.isEmpty()){
+                    throw new RuntimeException("Lista antiga não filtrada");
+                }
             }
+
             contract1.setTherapyLists(therapyList);
             contract1.getPatient().setStatus(true);
             contract1.setStatus(true);
@@ -211,7 +214,7 @@ public class RegisterShedule {
     private List<SShedule> factoryListSheduleNegative(List<SShedule> sheduleListNew, List<SShedule> sheduleListNow) {
 
         return sheduleListNow.stream().filter(s -> {
-            return !sheduleListNew.stream().anyMatch((SShedule u) ->
+            return sheduleListNew.stream().anyMatch((SShedule u) ->
                 s.getTherapy() == u.getTherapy() && s.getSessionIdEnum() == u.getSessionIdEnum()
             );
         }).toList();

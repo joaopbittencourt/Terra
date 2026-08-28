@@ -13,6 +13,8 @@ import com.house58.terra.patient.entity.Patient;
 import org.eclipse.angus.mail.util.UUDecoderStream;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -126,11 +128,19 @@ public class RegisterContract {
         if(null == patient)
             throw new RuntimeException("Paciente não encontrado");
 
+
         Contract contract = null ;
         for(Contract con: patient.getContracts()){
             if(con.getStatus()){
                 contract = this.contractRepository.getById(con.getId());
+                if(contract.getDateOfValidity().compareTo(new Date(System.currentTimeMillis())) > 0){
+                    contract.setStatus(false);
+                    this.contractRepository.save(contract);
+                    throw new RuntimeException("Contrato com data vencida não pode ser alterado");
+                }
+
                 contract.setModality(modality1);
+
                 break;
             }
         }
@@ -142,8 +152,9 @@ public class RegisterContract {
             contract.setEffetiveDate(new Date(System.currentTimeMillis()));
             //CONTRATO 12 MESES
             contract.setDateOfValidity(soma12Month(new Date(System.currentTimeMillis())));
-            contract.setStatus(Boolean.TRUE);
         }
+        contract.setStatus(Boolean.TRUE);
+
         return this.contractRepository.save(contract);
     }
 }
