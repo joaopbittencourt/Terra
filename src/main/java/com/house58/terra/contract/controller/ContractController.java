@@ -2,6 +2,7 @@ package com.house58.terra.contract.controller;
 
 import com.house58.terra.contract.dao.ContractRepository;
 import com.house58.terra.contract.dto.HealthPlanDTO;
+import com.house58.terra.contract.dto.ModalityDTO;
 import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.contract.entity.TherapyList;
 import com.house58.terra.contract.service.RegisterAppointment;
@@ -42,8 +43,8 @@ public class ContractController {
         return registerContract.registerPlanCode(patientId, healthPlanDTO);
     }
     @PostMapping("/register-modality/{patientId}")
-    private Contract registerModality(@PathVariable UUID patientId, @RequestBody Modality modality){
-        return registerContract.registerModality(patientId, modality);
+    private Contract registerModality(@PathVariable UUID patientId, @RequestBody ModalityDTO modalityDTO){
+        return registerContract.registerModality(patientId, modalityDTO);
     }
 
 

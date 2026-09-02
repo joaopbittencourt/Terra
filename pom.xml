@@ -122,6 +122,13 @@
 			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version> <!-- Use your specific version -->
+			<scope>provided</scope> <!--if running as a standalone JAR -->
+		</dependency>
         <!-- https://projectlombok.org/setup/maven -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -165,6 +172,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<env>
+							<BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
+						</env>
+					</image>
+				</configuration>
 			</plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -239,6 +253,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
         </plugins>
 	</build>
 	<repositories>

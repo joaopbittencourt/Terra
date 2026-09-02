@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ContractRepository extends JpaRepository<Contract, UUID> {
-    @Query("SELECT u FROM Contract u WHERE u.patient= :patient AND u.status = TRUE")
+    //@Query("SELECT u FROM Contract u WHERE u.patient= :patient AND u.status = TRUE")
+    @Query("SELECT u FROM Contract u WHERE u.patient= :patient")
     List<Contract> findContractByPatient(@Param("patient") Patient patient);
 }

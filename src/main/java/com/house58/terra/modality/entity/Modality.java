@@ -1,12 +1,15 @@
 package com.house58.terra.modality.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-@Entity (name = "modality")
+@Entity
+@Table(name = "modality")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Modality implements Serializable {
 
     @Id

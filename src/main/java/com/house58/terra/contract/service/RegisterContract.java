@@ -2,6 +2,7 @@ package com.house58.terra.contract.service;
 
 import com.house58.terra.contract.dao.ContractRepository;
 import com.house58.terra.contract.dto.HealthPlanDTO;
+import com.house58.terra.contract.dto.ModalityDTO;
 import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.contract.entity.TherapyList;
 import com.house58.terra.healthinsurance.dao.HealthInsuranceRepository;
@@ -117,9 +118,9 @@ public class RegisterContract {
         return this.contractRepository.findContractByPatient(patient);
     }
 
-    public Contract registerModality(UUID patientId, Modality modality) {
+    public Contract registerModality(UUID patientId, ModalityDTO modality) {
         Patient patient = this.patientRepository.getById(patientId);
-        Modality modality1 = this.modalityRepository.getById(modality.getId());
+        Modality modality1 = this.modalityRepository.getById(modality.getModality());
 
 
         if(null == modality1)
@@ -133,14 +134,7 @@ public class RegisterContract {
         for(Contract con: patient.getContracts()){
             if(con.getStatus()){
                 contract = this.contractRepository.getById(con.getId());
-                if(contract.getDateOfValidity().compareTo(new Date(System.currentTimeMillis())) > 0){
-                    contract.setStatus(false);
-                    this.contractRepository.save(contract);
-                    throw new RuntimeException("Contrato com data vencida não pode ser alterado");
-                }
-
                 contract.setModality(modality1);
-
                 break;
             }
         }
