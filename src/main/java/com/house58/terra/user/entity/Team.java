@@ -28,7 +28,7 @@ public class Team extends User{
     private BillingEnum billingMode;
     private String professionalRegistration;
 
-    @ManyToMany(cascade =  { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany
     @JoinTable(
             name = "team_therapies",
             joinColumns = @JoinColumn(name = "team_id"),

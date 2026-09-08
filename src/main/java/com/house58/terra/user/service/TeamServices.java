@@ -38,6 +38,7 @@ public class TeamServices {
         teamNow.setContractType(team.getContractType());
         teamNow.setRemuneration(team.getRemuneration());
         teamNow.setLastModify(Timestamp.from(Instant.now()));
+        System.out.println(teamNow);
         return this.teamRepository.save(teamNow);
     }
 
