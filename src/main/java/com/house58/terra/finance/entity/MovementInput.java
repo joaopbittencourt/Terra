@@ -4,22 +4,24 @@ import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.user.entity.User;
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 
-@Entity(name = "movement")
-public class Movement {
+@Entity(name = "movement-input")
+public class MovementInput {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private Double value;
+    private String description;
     @ManyToOne
     private Contract contract;
-    @ManyToOne
-    private User user;
-
-    public Movement() {
+    private String user;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+    public MovementInput() {
 
     }
 
@@ -47,11 +49,35 @@ public class Movement {
         this.contract = contract;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

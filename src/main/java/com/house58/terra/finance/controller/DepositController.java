@@ -3,7 +3,7 @@ package com.house58.terra.finance.controller;
 import com.house58.terra.finance.dao.BalanceRepository;
 import com.house58.terra.finance.dao.CostRepository;
 import com.house58.terra.finance.dao.InvoiceRepository;
-import com.house58.terra.finance.dao.MovementRepository;
+import com.house58.terra.finance.dao.MovementInputRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,9 +14,9 @@ public class DepositController {
     private final BalanceRepository balanceRepository;
     private final CostRepository costRepository;
     private final InvoiceRepository invoiceRepository;
-    private final MovementRepository movementRepository;
+    private final MovementInputRepository movementRepository;
 
-    public DepositController(BalanceRepository balanceRepository, CostRepository costRepository, InvoiceRepository invoiceRepository, MovementRepository movementRepository){
+    public DepositController(BalanceRepository balanceRepository, CostRepository costRepository, InvoiceRepository invoiceRepository, MovementInputRepository movementRepository){
         this.balanceRepository = balanceRepository;
         this.costRepository = costRepository;
         this.invoiceRepository = invoiceRepository;

@@ -27,6 +27,8 @@ public class MedicalGuide {
     private String authorizationCode; // Senha autorizada
 
     @Column(nullable = false)
+    private LocalDate authorizationDate;
+    @Column(nullable = false)
     private LocalDate expirationDate;
 
     // Controle de sessões para terapias recorrentes
