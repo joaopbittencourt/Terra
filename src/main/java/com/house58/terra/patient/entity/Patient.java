@@ -28,8 +28,10 @@ public class Patient {
     private Date birthDay;
     private String phoneNumber;
     private String gender;
-    @Column(name = "document", unique = true, nullable = false)
+    @Column(name = "document", unique = true, nullable = true)
     private String document;
+    @Column(name = "register-plan", unique = true, nullable = true)
+    private String registerPlan;
     private Boolean status;
     private String agreement;
     private String allergy;
@@ -164,4 +166,8 @@ public class Patient {
     public void setObservations(String observations) {
         this.observations = observations;
     }
+
+    public String getRegisterPlan() { return registerPlan; }
+
+    public void setRegisterPlan(String registerPlan) {this.registerPlan = registerPlan; }
 }

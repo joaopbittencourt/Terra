@@ -5,11 +5,13 @@ import com.house58.terra.finance.entity.MovementInput;
 import com.house58.terra.finance.enumm.PaymentMethodEnum;
 import com.house58.terra.patient.entity.Patient;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
 
+@Service
 public class ReceivePayment {
     private final MovementInputRepository movementInputRepository;
 

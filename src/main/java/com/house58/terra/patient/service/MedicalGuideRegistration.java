@@ -2,9 +2,11 @@ package com.house58.terra.patient.service;
 
 import com.house58.terra.patient.dao.MedicalGuideRepository;
 import com.house58.terra.patient.entity.MedicalGuide;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MedicalGuideRegistration {
     private final MedicalGuideRepository medicalGuideRepository;
 

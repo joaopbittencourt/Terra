@@ -6,10 +6,11 @@ import com.house58.terra.finance.enumm.PaymentMethodEnum;
 import com.house58.terra.patient.entity.Patient;
 import com.house58.terra.user.entity.Team;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-
+@Service
 public class MakePayment {
 
     private final MovementOutputRepository movementOutputRepository;

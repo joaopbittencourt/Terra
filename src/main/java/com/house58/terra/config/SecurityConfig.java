@@ -68,7 +68,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/checking/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/register-appointment/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/healthinsurance/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
-                        .requestMatchers(HttpMethod.POST, "/api/patient/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
+                        .requestMatchers(HttpMethod.POST, "/api/patient/**").hasAnyRole( RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/responsible/**").hasAnyRole(ADMIN,AUXILIAR, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/prontuario/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)
                         .requestMatchers(HttpMethod.POST, "/api/session/**").hasAnyRole(ADMIN,AUXILIAR, TERAPEUTA, RECEPCIONISTA)

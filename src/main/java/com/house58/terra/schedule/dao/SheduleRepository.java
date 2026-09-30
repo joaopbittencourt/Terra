@@ -1,13 +1,14 @@
 package com.house58.terra.schedule.dao;
 
-import com.house58.terra.contract.entity.Contract;
 import com.house58.terra.schedule.entity.SShedule;
 import com.house58.terra.schedule.enumm.SessionIdEnum;
 import com.house58.terra.user.entity.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,4 +31,9 @@ public interface SheduleRepository extends JpaRepository<SShedule, UUID> {
 
     @Query("SELECT u FROM SShedule u  WHERE u.contract.id = %:contract% AND u.status= true ")
     List<SShedule> getByContractSheduleActive(@Param("contract") UUID contract);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE SShedule u SET u.status = false WHERE u.sessionIdEnum in (%:sessionIdEnumList%) and u.therapist = %:therapist% ")
+    void removeSchedulesByTeam(@Param("therapist")Team therapist, @Param("sessionIdEnumList") List<String> sessionIdEnumList);
 }
